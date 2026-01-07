@@ -1,0 +1,61 @@
+{
+  "pairs": {
+    "USD/MXN": {
+      "name": "US Dollar to Mexican Peso",
+      "current": 17.25,
+      "history": [
+        { "date": "2024-12-20", "open": 17.15, "high": 17.28, "low": 17.10, "close": 17.22 },
+        { "date": "2024-12-21", "open": 17.22, "high": 17.35, "low": 17.18, "close": 17.30 },
+        { "date": "2024-12-22", "open": 17.30, "high": 17.42, "low": 17.25, "close": 17.38 },
+        { "date": "2024-12-23", "open": 17.38, "high": 17.45, "low": 17.20, "close": 17.28 },
+        { "date": "2024-12-24", "open": 17.28, "high": 17.32, "low": 17.15, "close": 17.18 },
+        { "date": "2024-12-25", "open": 17.18, "high": 17.25, "low": 17.12, "close": 17.20 },
+        { "date": "2024-12-26", "open": 17.20, "high": 17.30, "low": 17.18, "close": 17.25 }
+      ]
+    },
+    "USD/EUR": {
+      "name": "US Dollar to Euro",
+      "current": 0.92,
+      "history": [
+        { "date": "2024-12-20", "open": 0.91, "high": 0.915, "low": 0.905, "close": 0.912 },
+        { "date": "2024-12-21", "open": 0.912, "high": 0.918, "low": 0.910, "close": 0.915 },
+        { "date": "2024-12-22", "open": 0.915, "high": 0.922, "low": 0.914, "close": 0.920 },
+        { "date": "2024-12-23", "open": 0.920, "high": 0.925, "low": 0.918, "close": 0.923 },
+        { "date": "2024-12-24", "open": 0.923, "high": 0.928, "low": 0.920, "close": 0.925 },
+        { "date": "2024-12-25", "open": 0.925, "high": 0.926, "low": 0.918, "close": 0.919 },
+        { "date": "2024-12-26", "open": 0.919, "high": 0.924, "low": 0.917, "close": 0.920 }
+      ]
+    },
+    "USD/BRL": {
+      "name": "US Dollar to Brazilian Real",
+      "current": 4.89,
+      "history": [
+        { "date": "2024-12-20", "open": 4.82, "high": 4.88, "low": 4.80, "close": 4.85 },
+        { "date": "2024-12-21", "open": 4.85, "high": 4.90, "low": 4.83, "close": 4.88 },
+        { "date": "2024-12-22", "open": 4.88, "high": 4.95, "low": 4.86, "close": 4.92 },
+        { "date": "2024-12-23", "open": 4.92, "high": 4.98, "low": 4.90, "close": 4.95 },
+        { "date": "2024-12-24", "open": 4.95, "high": 4.97, "low": 4.88, "close": 4.90 },
+        { "date": "2024-12-25", "open": 4.90, "high": 4.92, "low": 4.85, "close": 4.87 },
+        { "date": "2024-12-26", "open": 4.87, "high": 4.93, "low": 4.86, "close": 4.89 }
+      ]
+    },
+    "EUR/GBP": {
+      "name": "Euro to British Pound",
+      "current": 0.86,
+      "history": [
+        { "date": "2024-12-20", "open": 0.855, "high": 0.860, "low": 0.852, "close": 0.858 },
+        { "date": "2024-12-21", "open": 0.858, "high": 0.862, "low": 0.855, "close": 0.860 },
+        { "date": "2024-12-22", "open": 0.860, "high": 0.865, "low": 0.858, "close": 0.863 },
+        { "date": "2024-12-23", "open": 0.863, "high": 0.868, "low": 0.860, "close": 0.865 },
+        { "date": "2024-12-24", "open": 0.865, "high": 0.867, "low": 0.858, "close": 0.860 },
+        { "date": "2024-12-25", "open": 0.860, "high": 0.862, "low": 0.855, "close": 0.858 },
+        { "date": "2024-12-26", "open": 0.858, "high": 0.864, "low": 0.856, "close": 0.860 }
+      ]
+    }
+  },
+  "metadata": {
+    "source": "Mock data for interview challenge",
+    "lastUpdated": "2024-12-26T12:00:00Z",
+    "updateFrequency": "For the challenge, simulate updates every few seconds with small random variations"
+  }
+}

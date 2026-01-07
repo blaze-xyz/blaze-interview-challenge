@@ -1,74 +1,62 @@
-# Blaze Engineering Take-Home Challenge
+# Blaze Engineering Take-Home Challenges
 
-Welcome! This challenge is designed to evaluate your problem-solving skills, technical judgment, and ability to build reliable financial systems.
+Welcome! This repository contains take-home challenges for the Blaze engineering interview process.
 
-## The Challenge: Payment Reconciliation Service
+## Available Challenges
 
-Build a service that reconciles payment transactions across multiple providers. This is a real problem we solve at Blaze - processing webhooks from different payment providers and ensuring our transaction records stay accurate.
+### 1. Payment Reconciliation Service (Backend-Focused)
+**Time:** 3-4 hours
 
-**Time:** 3-4 hours (please don't spend more than this)
+Build a service that reconciles payment transactions across multiple providers. Process webhooks, handle duplicates, and ensure financial accuracy.
 
-## What You'll Build
+**Skills tested:** Backend architecture, webhook handling, idempotency, financial calculations
 
-A reconciliation service that:
+[View Challenge →](./challenges/payment-reconciliation/)
 
-1. **Processes webhooks** from three different payment providers (Bridge, Bitso, DLocal)
-2. **Matches webhooks** to internal transaction records
-3. **Handles edge cases** like duplicates, out-of-order delivery, and amount discrepancies
-4. **Updates transaction status** based on reconciliation results
+---
 
-## Getting Started
+### 2. Exchange Rate Alert System (Full-Stack)
+**Time:** 4-5 hours
 
-1. Review the webhook formats in `starter-code/types.ts`
-2. Examine the test data in `test-data/`
-3. Implement your solution
-4. Write tests for edge cases
-5. Document your approach in `SOLUTION.md`
+Build a full-stack application that lets users set alerts for currency exchange rates and get notified when their target is hit.
 
-## What We're Looking For
+**Skills tested:** Full-stack development, real-time data, UI/UX, state management
 
-- **Correctness** - Does it handle all the edge cases?
-- **Code quality** - Is it readable and maintainable?
-- **Testing** - Are important scenarios covered?
-- **Financial accuracy** - Are money calculations precise?
-- **Documentation** - Can we understand your approach?
+[View Challenge →](./challenges/exchange-rate-alerts/)
 
-## Tools & AI Usage
+---
 
-**Use whatever tools you normally use** - including AI assistants like ChatGPT, Claude, or Copilot. We want to see how you work in a real environment.
+## General Guidelines
 
-**Important:** Please document your AI usage in `AI_USAGE.md`:
+### Tools & AI Usage
+
+**Use whatever tools you normally use** - including AI assistants like ChatGPT, Claude, Copilot, or Cursor. We want to see how you work in a real environment.
+
+Please document your AI usage in the `AI_USAGE.md` file:
 - What prompts worked well?
-- What did you accept, modify, or reject from AI suggestions?
+- What did you accept, modify, or reject?
 - What issues did you catch in AI-generated code?
 
-This helps us understand your problem-solving approach and judgment.
+### What We're Looking For
 
-## Edge Cases to Handle
+- **Correctness** - Does it work and handle edge cases?
+- **Code quality** - Is it readable and maintainable?
+- **Testing** - Are important scenarios covered?
+- **Documentation** - Can we understand your approach?
+- **Judgment** - Did you make sensible tradeoffs?
 
-Your service should handle:
+### Time Management
 
-- **Duplicate webhooks** - Same webhook sent multiple times
-- **Out-of-order delivery** - "completed" webhook arrives before "processing"
-- **Amount discrepancies** - Small differences (< 0.01%) due to FX rates
-- **Missing webhooks** - No webhook received within expected timeframe
-- **Invalid signatures** - Webhook authentication failures
+Please respect the time limits. We value your time and want to see what you can accomplish in a realistic timeframe. A working simple solution beats an incomplete complex one.
 
-## Deliverables
+### Submission
 
-1. **Working code** - Your reconciliation service implementation
-2. **Tests** - Covering happy paths and edge cases
-3. **SOLUTION.md** - Brief explanation of your approach, architecture decisions, and tradeoffs
-4. **AI_USAGE.md** - Documentation of how you used AI tools (if applicable)
-
-## Submission
-
-- Fork this repository
-- Implement your solution
-- Submit via pull request or send us a zip file
+1. Fork this repository
+2. Complete the challenge in your fork
+3. Submit via pull request or send us a zip file
 
 ## Questions?
 
-If anything is unclear, please reach out to your recruiting contact. We're happy to clarify requirements.
+If anything is unclear, reach out to your recruiting contact. We're happy to clarify.
 
 Good luck! We're excited to see your approach.
