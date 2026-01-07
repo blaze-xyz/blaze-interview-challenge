@@ -17,6 +17,49 @@ A web application with:
 3. **Alert Management** - View, enable/disable, and delete alerts
 4. **Notification History** - See which alerts have triggered
 
+## Blaze Exchange Rate API
+
+We're giving you access to our live exchange rate API. Use this for current rates:
+
+### Get All Rates (from USD)
+```
+GET https://api.blazemoney.com/currency/rates
+```
+
+**Response:**
+```json
+{
+  "MXN": 17.25,
+  "EUR": 0.92,
+  "BRL": 4.89,
+  "GBP": 0.79,
+  ...
+}
+```
+
+### Convert Amount
+```
+GET https://api.blazemoney.com/currency/convert/:to/:amount
+```
+
+**Example:** `GET https://api.blazemoney.com/currency/convert/MXN/100`
+
+**Response:**
+```json
+{
+  "from": "USD",
+  "to": "MXN",
+  "amount": 100,
+  "result": 1725.00,
+  "rate": 17.25
+}
+```
+
+### Rate Limits
+- These are public endpoints, no authentication required
+- Please don't poll more than once per second
+- For historical data, use the provided `mock-rates.json`
+
 ## Requirements
 
 ### Backend
@@ -28,8 +71,8 @@ A web application with:
 
 #### API Endpoints
 ```
-GET  /api/rates                    # Current rates for supported pairs
-GET  /api/rates/:pair/history      # Historical rates (last 7 days)
+GET  /api/rates                    # Proxy to Blaze API or return cached rates
+GET  /api/rates/:pair/history      # Historical rates (use mock data)
 GET  /api/alerts                   # User's alerts
 POST /api/alerts                   # Create new alert
 PATCH /api/alerts/:id              # Update alert (enable/disable)
@@ -38,7 +81,7 @@ GET  /api/notifications            # Notification history
 ```
 
 #### Rate Checking
-- Poll rates periodically (simulate with provided mock data)
+- Poll Blaze API periodically (every 30-60 seconds is fine)
 - Check alerts against current rates
 - Create notification when alert triggers
 - Auto-disable alert after it triggers (optional: make configurable)
@@ -46,12 +89,12 @@ GET  /api/notifications            # Notification history
 ### Frontend
 
 #### Rate Dashboard
-- Display current rates for common pairs (USD/MXN, USD/EUR, USD/BRL, EUR/GBP)
+- Display current rates for common pairs (USD→MXN, USD→EUR, USD→BRL, USD→GBP)
 - Simple chart showing 7-day history for selected pair
-- Auto-refresh indicator
+- Auto-refresh indicator showing when rates were last fetched
 
 #### Alert Form
-- Select currency pair
+- Select target currency (converting from USD)
 - Enter target rate
 - Choose direction: "Alert when rate goes above X" or "below X"
 - Show current rate for reference
@@ -60,33 +103,28 @@ GET  /api/notifications            # Notification history
 - Show all alerts with status (active, triggered, disabled)
 - Toggle enable/disable
 - Delete alert
-- Show how far current rate is from target
+- Show how far current rate is from target (e.g., "2.3% away")
 
 #### Notifications
 - List of triggered alerts with timestamp
-- Which alert, what rate triggered it
+- Which alert triggered and at what rate
 
-## Supported Currency Pairs
+## Supported Currencies
 
-Use these pairs for the challenge:
-- USD/MXN (US Dollar to Mexican Peso)
-- USD/EUR (US Dollar to Euro)
-- USD/BRL (US Dollar to Brazilian Real)
-- EUR/GBP (Euro to British Pound)
-
-## Mock Rate Data
-
-Use the provided `mock-rates.json` for historical data. For "live" rates, you can:
-- Add small random variations to the latest rate
-- Or fetch from a free API like exchangerate.host (optional)
+Focus on these USD conversions:
+- USD → MXN (Mexican Peso)
+- USD → EUR (Euro)
+- USD → BRL (Brazilian Real)
+- USD → GBP (British Pound)
 
 ## Edge Cases to Consider
 
 1. **Rate volatility** - Rate crosses threshold multiple times quickly
 2. **Invalid targets** - User sets impossible rate (e.g., USD/MXN = 0.5)
-3. **Duplicate alerts** - Same pair/direction/target already exists
+3. **Duplicate alerts** - Same currency/direction/target already exists
 4. **Disabled alerts** - Shouldn't trigger notifications
 5. **Rate gaps** - Rate jumps past target without hitting it exactly
+6. **API failures** - What happens if the Blaze API is temporarily unavailable?
 
 ## Tech Stack
 
