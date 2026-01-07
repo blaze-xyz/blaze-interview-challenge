@@ -1,0 +1,151 @@
+{
+  "bridge_webhooks": [
+    {
+      "event_type": "payment.initiated",
+      "payment_id": "bridge_pay_001",
+      "external_id": "blaze_ref_001",
+      "amount": "10000",
+      "currency": "USD",
+      "timestamp": "2024-12-20T10:01:00Z",
+      "signature": "sample_signature_1"
+    },
+    {
+      "event_type": "payment.completed",
+      "payment_id": "bridge_pay_001",
+      "external_id": "blaze_ref_001",
+      "amount": "10000",
+      "currency": "USD",
+      "timestamp": "2024-12-20T10:05:00Z",
+      "signature": "sample_signature_2",
+      "metadata": {
+        "fee": "250"
+      }
+    },
+    {
+      "event_type": "payment.completed",
+      "payment_id": "bridge_pay_001",
+      "external_id": "blaze_ref_001",
+      "amount": "10000",
+      "currency": "USD",
+      "timestamp": "2024-12-20T10:05:00Z",
+      "signature": "sample_signature_2",
+      "metadata": {
+        "fee": "250"
+      },
+      "_note": "DUPLICATE WEBHOOK - Should be handled idempotently"
+    }
+  ],
+  "bitso_webhooks": [
+    {
+      "type": "transfer",
+      "status": "processing",
+      "id": "bitso_123",
+      "client_id": "blaze_ref_002",
+      "value": 50000,
+      "currency_code": "MXN",
+      "created_at": 1734693600000,
+      "signature": "bitso_sig_1"
+    },
+    {
+      "type": "transfer",
+      "status": "success",
+      "id": "bitso_123",
+      "client_id": "blaze_ref_002",
+      "value": 49999.95,
+      "currency_code": "MXN",
+      "created_at": 1734694200000,
+      "signature": "bitso_sig_2",
+      "details": {
+        "fee_amount": 0.05,
+        "_note": "SMALL DISCREPANCY - Within 0.01% tolerance"
+      }
+    },
+    {
+      "type": "transfer",
+      "status": "failed",
+      "id": "bitso_456",
+      "client_id": "blaze_ref_005",
+      "value": 75000,
+      "currency_code": "USD",
+      "created_at": 1734780600000,
+      "signature": "bitso_sig_3"
+    }
+  ],
+  "dlocal_webhooks": [
+    {
+      "notification_type": "payment",
+      "payment": {
+        "id": "dlocal_789",
+        "merchant_reference": "blaze_ref_003",
+        "status": "PAID",
+        "amount": 25001,
+        "currency": "BRL",
+        "created_date": "2024-12-20T12:10:00.000Z"
+      },
+      "signature": "dlocal_sig_1",
+      "version": "2.0",
+      "_note": "AMOUNT DISCREPANCY - Greater than 0.01%, should flag for review"
+    },
+    {
+      "notification_type": "payment",
+      "payment": {
+        "id": "dlocal_789",
+        "merchant_reference": "blaze_ref_003",
+        "status": "AUTHORIZED",
+        "amount": 25000,
+        "currency": "BRL",
+        "created_date": "2024-12-20T12:08:00.000Z"
+      },
+      "signature": "dlocal_sig_2",
+      "version": "2.0",
+      "_note": "OUT OF ORDER - This 'authorized' webhook arrived after 'paid'"
+    }
+  ],
+  "edge_cases": {
+    "missing_webhook": {
+      "description": "Transaction txn_004 has no completed webhook after 24 hours",
+      "transaction_id": "txn_004",
+      "expected_timeout": "2024-12-22T09:00:00Z"
+    },
+    "invalid_signature": {
+      "event_type": "payment.completed",
+      "payment_id": "bridge_pay_999",
+      "external_id": "blaze_ref_999",
+      "amount": "5000",
+      "currency": "USD",
+      "timestamp": "2024-12-20T15:00:00Z",
+      "signature": "INVALID_SIGNATURE",
+      "_note": "This webhook should be rejected due to invalid signature"
+    },
+    "partial_payment": {
+      "description": "Payment completed in multiple parts",
+      "webhooks": [
+        {
+          "provider": "dlocal",
+          "notification_type": "payment",
+          "payment": {
+            "id": "dlocal_partial_1",
+            "merchant_reference": "blaze_ref_006",
+            "status": "PAID",
+            "amount": 5000,
+            "currency": "USD",
+            "created_date": "2024-12-21T14:00:00.000Z"
+          }
+        },
+        {
+          "provider": "dlocal",
+          "notification_type": "payment",
+          "payment": {
+            "id": "dlocal_partial_2",
+            "merchant_reference": "blaze_ref_006",
+            "status": "PAID",
+            "amount": 5000,
+            "currency": "USD",
+            "created_date": "2024-12-21T14:05:00.000Z"
+          }
+        }
+      ],
+      "expected_total": "10000"
+    }
+  }
+}
