@@ -23,7 +23,7 @@ We're giving you access to our live exchange rate API. Use this for current rate
 
 ### Get All Rates (from USD)
 ```
-GET https://api.blazemoney.com/currency/rates
+GET https://api.blaze.money/currency/rates
 ```
 
 **Response:**
@@ -39,10 +39,10 @@ GET https://api.blazemoney.com/currency/rates
 
 ### Convert Amount
 ```
-GET https://api.blazemoney.com/currency/convert/:to/:amount
+GET https://api.blaze.money/currency/convert/:to/:amount
 ```
 
-**Example:** `GET https://api.blazemoney.com/currency/convert/MXN/100`
+**Example:** `GET https://api.blaze.money/currency/convert/MXN/100`
 
 **Response:**
 ```json
